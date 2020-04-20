@@ -1,0 +1,199 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: -webkit-gradient(linear, left top, right top, from(#000), color-stop(29%, #62588A), color-stop(50%, #7568A5), color-stop(71%, #62588A), to(#000));
+  background: linear-gradient(90deg, #000 0%, #62588A 29%, #7568A5 50%, #62588A 71%, #000 100%);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.head {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #374685;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+  z-index: 99999999;
+}
+
+.head__logo {
+  position: absolute;
+  margin: 0 20px 0 0;
+}
+
+.head h1 {
+  position: absolute;
+  left: 100px;
+  height: 100%;
+  color: #EADCC7;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 60px;
+  text-align: center;
+  margin: 0;
+}
+
+.head__menu {
+  display: block;
+  color: #EADCC7;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  -webkit-transition: ease-out 0.1s;
+  transition: ease-out 0.1s;
+}
+
+.head__line {
+  display: block;
+  width: 60%;
+  margin: 0 20%;
+  border-bottom: 3px solid #7568A5;
+  -webkit-transition: ease-out 0.1s;
+  transition: ease-out 0.1s;
+}
+
+.head__link:hover .head__line {
+  width: 80%;
+  margin: 0 10%;
+  border-bottom: 3px solid #EADCC7;
+  -webkit-transition: ease-in 0.1s;
+  transition: ease-in 0.1s;
+}
+
+.head__link:hover .head__menu {
+  color: #7568A5;
+  -webkit-transition: ease-in 0.1s;
+  transition: ease-in 0.1s;
+}
+
+.top {
+  margin: 70px 0 0 0;
+}
+
+.top__background {
+  background-image: url("../img/mars.jpg");
+  height: 600px;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+}
+
+.top__mask {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(27, 37, 70, 0.61);
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  padding: 29px 0;
+}
+
+.top__foto {
+  background-image: url("../img/mars.jpg");
+  height: 100%;
+  background-size: contain;
+  border-radius: 16px;
+}
+
+.top__menu {
+  color: #EADCC7;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+}
+
+.top__line {
+  display: block;
+  width: 60%;
+  border-bottom: 3px solid #7568A5;
+  -webkit-transition: ease-out 0.1s;
+  transition: ease-out 0.1s;
+  margin-bottom: 20px;
+}
+
+.top__raiting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 70px;
+}
+
+.top__icon {
+  height: 100%;
+}
+
+.top__schet {
+  color: #EADCC7;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+  margin: 0 60px 0 20px;
+}
+
+.top__infa {
+  color: #EADCC7;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 36px;
+}
+
+.top__link {
+  color: #EADCC7;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #7568A5;
+          text-decoration-color: #7568A5;
+  -webkit-transition: ease-out 0.1s;
+  transition: ease-out 0.1s;
+}
+
+.top__link:hover {
+  color: #7568A5;
+  -webkit-text-decoration-color: #EADCC7;
+          text-decoration-color: #EADCC7;
+  text-decoration: underline;
+  -webkit-transition: ease-in 0.1s;
+  transition: ease-in 0.1s;
+}
+
+.top .prochee {
+  color: #B5A997;
+}
+
+.top .cut {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+/*# sourceMappingURL=style.css.map */
