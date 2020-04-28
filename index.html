@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" async></script>
 </head>
 <body>
     <header>
@@ -35,22 +36,22 @@
     </header>
     <section class="top">
         <div class="container">
-            <div class="row top__background">
+            <div id="poster" class="row top__background">
                 <div class="top__mask">
-                    <div class="top__foto offset-md-1 col-md-4"></div>
+                    <div id="foto" class="top__foto offset-md-1 col-md-4"></div>
                     <div class="top__opisanie offset-md-1 col-md-5">
-                        <h2 class="top__menu">Марсианин</h2>
+                        <h2 id="title" class="top__menu"></h2>
                         <div class="top__line"></div>
                         <div class="top__raiting">
                             <img src="icons/imdb.png" alt="imdb" class="top__icon ">
-                            <h2 class="top__schet">7.66</h2>
+                            <h2 id="imdb" class="top__schet"></h2>
                             <img src="icons/kinopoisk.png" alt="kinopoisk" class="top__icon ">
                             <h2 class="top__schet">8.00</h2>
                         </div>
                         <p class="top__infa">
-                            Год выхода: <span class="prochee">2015</span> <br>
+                            Год выхода: <span id="data" class="prochee">2015</span> <br>
                             Страна: <snap class="prochee">Великобритания, США, Венгрия</snap> <br>
-                            Оригинальное название: <span class="prochee">The Martian</span> <br>
+                            Оригинальное название: <span id="original_title" class="prochee">The Martian</span> <br>
                             Жанр: <a href="#" class="top__link">Приключения</a> <a href="#" class="top__link"> Фанатстика</a> <br>
                             Актеры: <span class="prochee cut">Мэтт Дэймон, Джессика Честейн, Чиветель Эджиофор, Кристен Уиг, Джефф Дэниелс, Майкл Пенья, Шон Бин, Кейт Мара, Себастиан Стэн, Аксель Хенни <br> </span>
                             Режиссер: <span class="prochee">Ридли Скотт</span> <br>
@@ -65,7 +66,6 @@
     <section class="janr">
         <div class="container">
             <div class="row">
-
             </div>
         </div>
     </section>
@@ -77,5 +77,6 @@
         </div>
     </footer>
     <div class="background"></div>
+    
 </body>
 </html>

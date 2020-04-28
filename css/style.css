@@ -94,9 +94,9 @@ a:hover {
 }
 
 .top__background {
-  background-image: url("../img/mars.jpg");
   height: 600px;
   background-position-x: center;
+  background-size: cover;
   background-position-y: center;
   background-repeat: no-repeat;
   border-radius: 16px;
@@ -116,9 +116,11 @@ a:hover {
 }
 
 .top__foto {
-  background-image: url("../img/mars.jpg");
   height: 100%;
-  background-size: contain;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
   border-radius: 16px;
 }
 
@@ -192,8 +194,8 @@ a:hover {
 .top .cut {
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
 }
 /*# sourceMappingURL=style.css.map */
