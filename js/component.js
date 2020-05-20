@@ -1,15 +1,26 @@
 class Component {
     'use strict';
-
+    /**
+     * Создает компанент занося в property полученный стек данных,
+     * в container и root undefined, инициализирует массив активных или изменямых оьбектов
+     * @param { object } property 
+     */
     constructor(property) {
         this.property = property;
         this.container = undefined;
         this.elements = [];
         this.root = undefined;
     }
-
+    /**
+     * Функция срабатываемая до создания элемента, служит для создвния верстки объткта (ДЛЯ КАЖДОГО ЭЛЕМЕНТА СВОЕ ПЕРЕОПРЕДЕЛЕНИЕ)
+     */
     preLoad() { }
-
+    /**
+     * Загрузка объекта в DOM, занося его в container, при этом в значение this.container заносится полученная из preload() верстка а в this.root записывается container,
+     * после весь оьбект передается руководителю
+     * @param { document } container Элемент полученный через document
+     * @param { object } supervisor Объект руководителя 
+     */
     load(container, supervisor) {
         const newComponent = this.preLoad(this.property);
         (typeof newComponent === 'string') ? container.insertAdjacentHTML(this.property.position || 'beforeend', newComponent) : container.insertAdjacentElement(this.property.position || 'beforeend', newComponent);
@@ -17,11 +28,13 @@ class Component {
         this.root = container;
         supervisor.addElement(this, this.property.id);
     };
-
+    /**
+     * Функция срабатываемая после создания элемента, служит для создвния активностей на элементах (ДЛЯ КАЖДОГО ЭЛЕМЕНТА СВОЕ ПЕРЕОПРЕДЕЛЕНИЕ)
+     */
     afterLoad() { };
-
-    preUnload() { };
-
+    /**
+     * Удаления элемента из DOM и его затирка
+     */
     unload() {
         this.container.remove();
         this.elements.forEach((buton) => {
@@ -30,13 +43,18 @@ class Component {
         this.elements = undefined;
         this.container = undefined;
     };
-
+    /**
+     * Функция обновляет элемент (ДЛЯ КАЖДОГО ЭЛЕМЕНТА СВОЕ ПЕРЕОПРЕДЕЛЕНИЕ)
+     */
     update(){};
 }
 
 class Header extends Component {
     'use strict';
-    
+    /**
+     * Функция срабатываемая до создания элемента, служит для создвния верстки объткта
+     * @returns { string } Возвращает html элемент
+     */
     preLoad() {
         return `` +
             `<header class="logo container">` +
@@ -50,7 +68,10 @@ class Header extends Component {
 
 class Content extends Component {
     'use strict';
-
+    /**
+     * Функция срабатываемая до создания элемента, служит для создвния верстки объткта
+     * @returns { string } Возвращает html элемент
+     */
     preLoad() {
         return `` +
             `<section id="main-container" class="content container">` +
@@ -61,16 +82,15 @@ class Content extends Component {
             `<div id="teacher-container" class="content__flex"></div>` +
             `</section>`;
     }
-
-    load(container, supervisor) {
-        supervisor.addElement(this, this.property.id);
-        super.load(container, supervisor);
-    }
 }
 
 class Person extends Component {
     'use strict';
-
+    /**
+     * Функция срабатываемая до создания элемента, служит для создвния верстки объткта
+     * @param { object } property Данные для создвния верстки обьекта
+     * @returns { object } Возвращает documet элемент
+     */
     preLoad(property) {
         const container = document.createElement('div');
         const avatar = document.createElement('img');
@@ -106,13 +126,19 @@ class Person extends Component {
         container.appendChild(university);
         return container;
     }
-
+    /**
+     * Функция срабатываемая после создания элемента, служит для создвния активностей на элементах
+     * Добовляет к кнопкам действия по клику: создание карточки персоны
+     * @param { object } supervisor Объект руководителя
+     */
     afterLoad(supervisor) {
         this.elements['table'].addEventListener('click', () => {
             supervisor.getElement('factoryElements').createElement('personCard', document.body, this.property, supervisor);
         });
     }
-
+    /**
+     * Функция обновляет элемент: значене курса/должности после его изменения
+     */
     update(){
         switch (this.property.tag) {
             case 'student':
@@ -129,12 +155,21 @@ class Person extends Component {
 
 class PersonCard extends Component {
     'use strict';
-
+     /**
+     * Создает компанент занося в property полученный стек данных,
+     * в container и root undefined, инициализирует массив активных или изменямых оьбектов
+     * меняет id на id персоны на которой было вызванно создание + "_card"
+     * @param { object } property 
+     */
     constructor(property) {
         super(property);
         this.property.id = property.id + '_card';
     }
-
+    /**
+     * Функция срабатываемая до создания элемента, служит для создвния верстки объткта
+     * @param { object } property Данные для создвния верстки обьекта
+     * @returns { object } Возвращает documet элемент
+     */
     preLoad(property) {
         const cardPerson = document.createElement('div');
         const container = document.createElement('div');
@@ -203,15 +238,18 @@ class PersonCard extends Component {
         container.appendChild(value2);
         cardPerson.appendChild(container);
 
-        this.elements['name'] = name;
-        this.elements['value1'] = value1;
         this.elements['value2'] = value2;
         this.elements['close'] = buttonClose;
         this.elements['delete'] = buttonDel;
         this.elements['upper'] = buttonUp;
         return cardPerson;
     }
-
+    /**
+     * Функция срабатываемая после создания элемента, служит для создвния активностей на элементах
+     * Добовляет к кнопкам действия по клику: удаление карточки персоны, удаление карточки персоны + удаление из списка студеноов + удаление самого студента из DOM,
+     * повышение студента на курс
+     * @param { object } supervisor Объект руководителя
+     */
     afterLoad(supervisor) {
         this.elements['close'].addEventListener('click', () => {
             supervisor.removeElement(this.property.id);
@@ -227,17 +265,24 @@ class PersonCard extends Component {
             supervisor.getElement(this.property.id.split('_', 1)).update();
         });
     }
-
+    /**
+     * Функция обновляет элемент: значене курса/должности после его изменения
+     */
     update(){
-        this.elements['name'].textContent = this.property.name;
-        this.elements['value1'].textContent = this.property.getBirthDateStr;
         this.elements['value2'].textContent = this.property.getUniversity;
     }
 }
 
 export class FactoryElements {
     'use strict';
-
+    /**
+     * Фабрика строит элемент исходя из его element и других данных помещая его в container
+     * @param { string } element Определенное название элемента header | content | person | personCard
+     * @param { document } container Элемент полученный через document
+     * @param { object } property Данные для построения элемента (необходим id)
+     * @param { object } supervisor Объект руководителя
+     * @returns { object } Вернет построеный элемент
+     */
     createElement(element, container, property, supervisor) {
         switch (element) {
             case 'header':

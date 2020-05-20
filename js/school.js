@@ -1,21 +1,32 @@
 export class SchoollFactory {
     'use strict';
-    
+    /**
+     * Инициалищирует массив студентов и преподователей
+     */
     constructor() {
         this.studentList = [];
         this.teacherList = [];
     }
-
+    /**
+     * Добавляет в список данного студента
+     * @param { object } student Обьект студента
+     */
     addStudent(student) {
         this.studentList.push(student);
         console.log(`Студент ${student.name} зачислен на ${student.course} курс`);
     }
-
+    /**
+     * Добавляет в список данного преподователя
+     * @param { object } student Обьект преподователя
+     */
     addTeacher(teacher) {
         this.teacherList.push(teacher);
         console.log(`Преподователь ${teacher.name} назначен на предмет: ${teacher.work}`);
     }
-
+    /**
+     * Удаляет из списка персону исзодя из значние tag а также имени курса/должности
+     * @param { object } property Данные о персоне (хватит имени курса/должности)
+     */
     removePerson(property) {
         switch (property.tag) {
             case 'student':
@@ -40,7 +51,11 @@ export class SchoollFactory {
                 console.log('Не все поля введены верно.');
         }
     }
-
+    /**
+     * Находит из списка персону исзодя из значние tag а также имени курса/должности
+     * @param { object } property Данные о персоне (хватит имени курса/должности
+     * @returns { object } Вернет оъбект персоны
+     */
     getPerson(property) {
         let searchPerson = null;
         switch (property.tag) {
