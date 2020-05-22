@@ -1,0 +1,35 @@
+/*
+Переменные-----------------------------------------
+*/
+//Толщина шрифта
+$normal: 400;
+$bold: 500;
+//Цвета
+$mainBackground: #EDEDED;
+$headBackground: #2A2A30;
+$footBackground: black;
+$textFoot: #EEEEEE;
+$textMain: black;
+$textNav: blue;
+$textTitle: red;
+$shadow: rgba(0, 0, 0, 0.5);
+//Размеры
+$fontBig: 24px;
+$fontNormal: 18px;
+$fontSmall: 14px;
+$fontTitleBig: 32px;
+/*
+Подключение шрифтов--------------------------------
+*/
+//Нормальный
+@font-face {
+    font-family: 'Open Sans';
+    src: url(/fonts/OpenSans-Regular.ttf); 
+    font-weight: $normal;
+}
+//Жирный
+@font-face {
+    font-family: 'Open Sans';
+    src: url(/fonts/OpenSans-SemiBold.ttf);
+    font-weight: $bold;
+}
