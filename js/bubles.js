@@ -1,9 +1,18 @@
+/**
+ * Класс компонента bubles.
+ * Служит для создания пузырика
+ */
 export class Bubles extends Inferno.Component {
     constructor(props){
         super(props);
         this.state = {
+            /*
+            Сюда записывается:
+                название анимации
+                номер в пузырике
+                имя стандартного класса (впоследствии изменяется при "замораживании")
+            */
             anim: props.style['animation-name'] || 'up',
-            backgrounColor: props.style['background-color'] || 'red',
             number: props.number || 0,
             className: 'bublesContainer__bubles__content'
         }
