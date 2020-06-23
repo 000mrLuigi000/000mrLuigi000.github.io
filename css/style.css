@@ -12,7 +12,7 @@ html {
   white-space: pre;
   text-align: center;
   font-size: 40px;
-  color: #FFF8DC;
+  color: #f7ff82;
   text-shadow: 0 0 2px #191970;
 }
 .bublesContainer {
@@ -29,7 +29,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: ease 0.8s forwards;
+  animation: cubic-bezier(0.69, 0.01, 0.33, 0.98) 1.5s forwards;
 }
 .bublesContainer__bubles__content {
   width: 60px;
@@ -38,34 +38,45 @@ html {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  color: #FFF8DC;
+  color: #f7ff82;
   background-color: rgba(70, 130, 180, 0.5);
   font-size: 40px;
   box-shadow: 0 0 4px 4px rgba(0, 255, 255, 0.5);
-  text-shadow: 0 0 4px #FFF8DC;
+  text-shadow: 0 0 4px #f7ff82;
 }
 .bublesContainer__bubles__content_freez {
-  background-color: rgba(255, 248, 220, 0.8);
+  background-color: rgba(247, 255, 130, 0.8);
   box-shadow: 0 0 4px 4px rgba(88, 88, 226, 0.5);
   color: #191970;
   text-shadow: 0 0 4px #191970;
 }
 @keyframes spawn {
   0% {
-    transform: translateY(20%);
+    transform: translateY(-80%);
+    opacity: 0;
   }
   100% {
     transform: translateY(0%);
+    opacity: 1;
   }
 }
 @keyframes idle {
   0% {
     transform: translate(0, 0);
   }
-  25% {
+  30% {
     transform: translate(0, -80%);
   }
-  75% {
+  40% {
+    transform: translate(-10%, -80%);
+  }
+  50% {
+    transform: translate(5%, -80%);
+  }
+  60% {
+    transform: translate(0, -80%);
+  }
+  70% {
     transform: translate(0, -80%);
   }
   100% {
@@ -74,29 +85,69 @@ html {
 }
 @keyframes swapL {
   0% {
-    transform: translate(0, 0);
+    transform-origin: 100% 50%;
+    transform: translate(0, 0) perspective(0) rotateY(0);
   }
-  25% {
-    transform: translate(0, -80%);
+  30% {
+    transform-origin: 100% 50%;
+    transform: translate(0, -80%) perspective(0) rotateY(0);
   }
-  75% {
-    transform: translate(-100%, -80%);
+  50% {
+    transform-origin: 100% 50%;
+    transform: translate(0, -80%) perspective(10px) rotateY(-5deg);
+  }
+  70% {
+    transform-origin: 100% 50%;
+    transform: translate(-100%, -80%) perspective(0) rotateY(0);
   }
   100% {
-    transform: translate(-100%, 0);
+    transform-origin: 100% 50%;
+    transform: translate(-100%, 0) perspective(0) rotateY(0);
   }
 }
 @keyframes swapR {
   0% {
-    transform: translate(0, 0);
+    transform-origin: 0 50%;
+    transform: translate(0, 0) perspective(0) rotateY(0);
   }
-  25% {
-    transform: translate(0, -80%);
+  30% {
+    transform-origin: 0 50%;
+    transform: translate(0, -80%) perspective(0) rotateY(0);
   }
-  75% {
-    transform: translate(100%, -80%);
+  50% {
+    transform-origin: 0 50%;
+    transform: translate(0, -80%) perspective(10px) rotateY(5deg);
+  }
+  70% {
+    transform-origin: 0 50%;
+    transform: translate(100%, -80%) perspective(0) rotateY(0);
   }
   100% {
-    transform: translate(100%, 0);
+    transform-origin: 0 50%;
+    transform: translate(100%, 0) perspective(0) rotateY(0);
+  }
+}
+@keyframes err {
+  30% {
+    background-color: rgba(70, 130, 180, 0.5);
+  }
+  40%,
+  60% {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  70% {
+    background-color: rgba(70, 130, 180, 0.5);
+  }
+}
+@keyframes ok {
+  30% {
+    background-color: rgba(70, 130, 180, 0.5);
+  }
+  40%,
+  60% {
+    background-color: rgba(0, 128, 0, 0.5);
+  }
+  70% {
+    background-color: rgba(70, 130, 180, 0.5);
   }
 }

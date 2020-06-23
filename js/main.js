@@ -14,7 +14,7 @@ const length = 10;
 //Хранилище промисов
 let promise = [];
 //Время выполнения создания и анимации
-const time = 1000;
+const time = 1500;
 /**
  * Таймер.
  * Возвращает законченый промис после определенного времени 
@@ -58,42 +58,68 @@ function spawn(i, container) {
  */
 function swap(time, i, j, isSwap, end) {
     //Ставится задержка длиной time
-    promise.push(delay(time).then(() => {
+    return delay(time).then(() => {
         //Если isSwap = true то выполняется набор анимации обмена
         if (isSwap) {
-            arrComp[i].children.setState({ anim: 'swapR' });
-            arrComp[j].children.setState({ anim: 'swapL' });
+            arrComp[i].children.setState({
+                animParent: 'swapR',
+                animChild: 'ok',
+                animDuration: 1.5
+            });
+            arrComp[j].children.setState({
+                animParent: 'swapL',
+                animChild: 'ok',
+                animDuration: 1.5
+            });
         }
         //Если isSwap = false то выполняется набор анимации простоя 
         else {
-            arrComp[i].children.setState({ anim: 'idle' });
-            arrComp[j].children.setState({ anim: 'idle' });
+            arrComp[i].children.setState({
+                animParent: 'idle',
+                animChild: 'err',
+                animDuration: 1.5
+            });
+            arrComp[j].children.setState({
+                animParent: 'idle',
+                animChild: 'err',
+                animDuration: 1.5
+            });
         }
         //Ставится задержка длиной 900ms (безопасное время обновления элементов, с расчетом => время выполниения - 100)
-        delay(900).then(() => {
+        delay(1450).then(() => {
             //Если isSwap = true то элементы обновляются и анимция обнуляется
             if (isSwap) {
                 let x = arrComp[i].children.state.number;
                 arrComp[i].children.setState({
-                    anim: 'none',
+                    animParent: 'none',
+                    animChild: 'none',
+                    animDuration: 1.5,
                     number: arrComp[j].children.state.number
                 });
                 arrComp[j].children.setState({
-                    anim: 'none',
+                    animParent: 'none',
+                    animChild: 'none',
+                    animDuration: 1.5,
                     number: x
                 });
             }
             //Если isSwap = false то анимция обнуляется 
             else {
-                arrComp[i].children.setState({ anim: 'none' });
-                arrComp[j].children.setState({ anim: 'none' });
+                arrComp[i].children.setState({
+                    animParent: 'none',
+                    animChild: 'none'
+                });
+                arrComp[j].children.setState({
+                    animParent: 'none',
+                    animChild: 'none'
+                });
             }
             // //Если end = true то данный элемент "замораживается"
             (end) ? arrComp[end].children.setState((prevState) => ({
                 className: prevState.className + ' bublesContainer__bubles__content_freez'
             })) : undefined;
         });
-    }));
+    });
 }
 
 //Происходит отрисовка родительских объектов на странице
@@ -106,7 +132,7 @@ for (let i = 0; i < length; i++) {
 //Когда первый стек промисов выполнится (тоесть отрисуется старый массив)
 Promise.all(promise).then(() => {
     //Обнуляется хранище промисов и пузырьков
-    promise = []; 
+    promise = [];
     arrComp = [];
     //Записывается полученный объект с новым массивом и стеком вызовов
     let newArr = sort.buble(arr);
@@ -114,13 +140,15 @@ Promise.all(promise).then(() => {
     arr.forEach((item, i) => {
         spawn(i, document.getElementById('newContainer'));
     });
+    //Задержка перед анимацией сортировкой
+    promise.push(delay((time / 10 * length) + 500));
     //Когда второй стек промисов выполнится (тоесть отрисуется новый массив)
     Promise.all(promise).then(() => {
         //Обнуляется хранище промисов
         promise = [];
         //Запустится механизм обмена
         newArr.callback.forEach((item, i) => {
-            swap(time * i, item[0], item[1], item[2], item[3]);
+            promise.push(swap(time * i, item[0], item[1], item[2], item[3]));
         });
         //Когда третий стек промисов выполнится (тоесть закончится последняя анимация обмена)
         Promise.all(promise).then(() => {
