@@ -1,14 +1,14 @@
 'use strict';
 /**
- * Класс компонента root.
- * Служит созданию ядра контента.
+ * Класс компонента InputCell.
+ * Служит созданию нажимной клетки.
  */
 export class InputCell extends Inferno.Component {
     constructor(props) {
         super(props);
         this.state = {
-            img: '',
-            func: props.func ?? undefined
+            img: '/',
+            func: props.func ?? undefined //Функция срабаотываемая при нажатии
         };
     }
 

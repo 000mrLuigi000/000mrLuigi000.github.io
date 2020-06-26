@@ -1,11 +1,19 @@
+'use strict';
 /**
  * Класс компонента Ships.
- * Служит для создания пузырика
+ * Служит созданию коробля.
  */
 export class Ships extends Inferno.Component {
     constructor(props) {
         super(props);
         this.state = {
+            /**
+             * координаты начала по X и Y,
+             * кординаты конца по X и Y,
+             * повернута ли кортинка,
+             * количество палуб,
+             * виден ли
+             */
             x1: props.x1 ?? 0,
             y1: props.y1 ?? 0,
             x2: props.x2 ?? 0,
@@ -14,10 +22,14 @@ export class Ships extends Inferno.Component {
             deck: props.deck ?? 0,
             visible: props.visible ?? 1
         };
-        this.life = props.deck ?? 0;
+        this.life = props.deck ?? 0; //Жизнь коробля ровна его палубе
     }
 
+    /**
+     * Служит для отрисовки картинки коробля
+     */
     _drawIcon() {
+        //Условие поворота от него зависит как будет отображон корабль
         if (this.state.rotate) {
             return Inferno.createElement('div', {
                 className: 'fleetContainer__ship__icon',
@@ -44,6 +56,9 @@ export class Ships extends Inferno.Component {
     }
 
     render() {
+        /**
+         * Создается объект корабля привязанный к сетке
+         */
         return Inferno.createElement('div', {
             className: 'fleetContainer__ship',
             style: {

@@ -1,7 +1,7 @@
 'use strict';
 /**
- * Класс компонента root.
- * Служит созданию ядра контента.
+ * Класс компонента TableSVG.
+ * Служит созданию фона таблицы для игры из svg файла.
  */
 export class TableSVG extends Inferno.Component {
     constructor(props) {

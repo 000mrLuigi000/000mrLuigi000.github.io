@@ -1,7 +1,7 @@
 'use strict';
 /**
- * Класс компонента root.
- * Служит созданию ядра контента.
+ * Класс компонента Page1.
+ * Служит созданию первой страницы.
  */
 export class Page1 extends Inferno.Component {
     constructor(props) {
@@ -10,11 +10,7 @@ export class Page1 extends Inferno.Component {
 
     render() {
         /**
-         * В пустышку помещается:
-         *  текст приветствия,
-         *  контейнер старого массива
-         *  вспомогательный текст
-         *  контейнер отсортированного массива
+         * Создается форма с думя полями ааода текста и кнопкой
          */
         return Inferno.createElement('form', { className: 'start', id: 'form', action: '#' },
             Inferno.createElement('input', {
