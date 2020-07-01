@@ -157,6 +157,7 @@ export default class Controller {
                 whoWin: whoWin,
                 message: message
             });
+            this.model.whoMove = 'e';
             this.delay(1000).then(() => {
                 if (confirm('Хотите повторить')) {
                     this.newGame();
