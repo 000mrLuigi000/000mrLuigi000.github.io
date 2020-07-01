@@ -19,6 +19,11 @@ export default class Controller {
         });
     }
 
+    swapPlayer() {
+        let x = Math.random();
+        return (x >= 0.5) ? 'p' : 'e';
+    }
+
     newGame() {
         this.model.reinit();
         this.model.whoMove = this.swapPlayer();
@@ -103,7 +108,7 @@ export default class Controller {
         this.ai.default();
         let winNumber;
         if (cellWin) {
-            winNumber = (this.model.whoMove === 'p') ? 1 : -1;
+            winNumber = (this.model.whoMove === 'p') ? -1 : 1;
             this.model.ui.inputTable.$LI.children.forEach((cell, index) => {
                 if (index === cellWin[0] || index === cellWin[1] || index === cellWin[2]) {
                     this.viewer.update({
@@ -118,10 +123,10 @@ export default class Controller {
         }
         if (this.model.matchNumber < 4) {
             this.win(winNumber);
-            this.model.whoMove = this.swapPlayer();
             this.model.default();
-            this.model.matchNumber++;
-            this.delay(1000).then(() => {
+            this.model.whoMove = 'e';
+            this.delay(500).then(() => {
+                this.model.whoMove = this.swapPlayer();
                 this.viewer.update({
                     component: this.model.ui.history,
                     matchItems: this.model.ui.history.state.matchItems
@@ -136,6 +141,7 @@ export default class Controller {
                         imageName: ''
                     });
                 });
+                this.model.matchNumber++;
                 (this.model.whoMove === 'e') ? this.ai.move() : undefined;
             });
         } else {
@@ -158,17 +164,12 @@ export default class Controller {
                 message: message
             });
             this.model.whoMove = 'e';
-            this.delay(1000).then(() => {
+            this.delay(2000).then(() => {
                 if (confirm('Хотите повторить')) {
                     this.newGame();
                 }
             });
         }
-    }
-
-    swapPlayer() {
-        let x = Math.random();
-        return (x >= 0.5) ? 'p' : 'e';
     }
 
     move(cell) {
@@ -177,6 +178,7 @@ export default class Controller {
                 component: cell,
                 imageName: (this.model.moveCout % 2 === 1) ? 'zero.svg' : 'cross.svg'
             });
+            this.model.whoMove = 'e';
             this.viewer.update({
                 component: this.model.ui.playerContainer,
                 whoMove: this.model.whoMove
@@ -186,10 +188,15 @@ export default class Controller {
             let cellWin = this.chekWin();
             if (cellWin) {
                 this.nextRaund(cellWin);
+                return;
             } else {
-                (!this.model.moveCout) ? this.nextRaund() : this.ai.move();
+                if (!this.model.moveCout) {
+                    this.nextRaund();
+                    return;
+                } else {
+                    this.ai.move();
+                }
             }
-            this.model.whoMove = 'e';
         }
     }
 }

@@ -28,12 +28,13 @@ export default class Ai {
         let cell = this.model.ui.inputTable.$LI.children[this.moveCout[pos][0] * 3 + this.moveCout[pos][1]].children;
         this.controller.delay(500).then(() => {
             this.update({
-                component: this.model.ui.playerContainer,
-                whoMove: this.model.whoMove
-            });
-            this.update({
                 component: cell,
                 imageName: (this.model.moveCout % 2 === 1) ? 'zero.svg' : 'cross.svg'
+            });
+            this.model.whoMove = 'p';
+            this.update({
+                component: this.model.ui.playerContainer,
+                whoMove: this.model.whoMove
             });
             this.moveCout.splice(pos, 1);
             this.model.moveCout--;
@@ -41,10 +42,13 @@ export default class Ai {
             let cellWin = this.controller.chekWin();
             if (cellWin) {
                 this.controller.nextRaund(cellWin);
+                return;
             } else {
-                (!this.model.moveCout) ? this.controller.nextRaund() : undefined;
+                if (!this.model.moveCout) {
+                    this.controller.nextRaund();
+                    return;
+                }
             }
-            this.model.whoMove = 'p';
         });
     }
 }
