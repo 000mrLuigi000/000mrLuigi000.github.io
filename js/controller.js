@@ -119,6 +119,8 @@ export default class Controller {
         if (this.model.matchNumber < 4) {
             this.win(winNumber);
             this.model.whoMove = this.swapPlayer();
+            this.model.default();
+            this.model.matchNumber++;
             this.delay(1000).then(() => {
                 this.viewer.update({
                     component: this.model.ui.history,
@@ -134,8 +136,6 @@ export default class Controller {
                         imageName: ''
                     });
                 });
-                this.model.matchNumber++;
-                this.model.default();
                 (this.model.whoMove === 'e') ? this.ai.move() : undefined;
             });
         } else {
