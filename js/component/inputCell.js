@@ -16,7 +16,7 @@ export default class InputCell extends Inferno.Component {
       "onClick": () => {
         this.props.click(this);
       },
-      "style": `background-image: url(./img/${this.state.imageName}); background-color: ${this.state.whoWin};`
+      "style": this.state.imageName ? `background-image: url(./img/${this.state.imageName}); background-color: ${this.state.whoWin};` : ''
     });
   }
 
